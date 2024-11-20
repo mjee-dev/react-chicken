@@ -32,6 +32,9 @@ function NotFound() {
 function App() {
   return (
     <Router>
+       <div className="text-3xl font-bold underline">
+        Hello, Tailwind!
+      </div>
       <div>
         {/* 네비게이션 링크 */}
         <nav>
