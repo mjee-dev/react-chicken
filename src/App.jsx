@@ -7,12 +7,10 @@ import Join from "./component/Join";
 import Login from "./component/Login";
 import Map from "./component/Map";
 import MyInfo from "./component/MyInfo";
+import NotFound from "./component/NotFound";
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 
 // 메인 컴포넌트
-function NotFound() {
-  return <h2>페이지를 찾을 수 없습니다. (404)</h2>
-}
 
 function App() {
   return (
@@ -46,7 +44,7 @@ function App() {
             <li><Link to="/join">회원가입</Link></li>
             <li><Link to="/login">로그인</Link></li>
             <li><Link to="/map">지도</Link></li>
-            <li><Link to="/myInfo/:id">내 정보</Link></li>
+            <li><Link to="">내 정보</Link></li>
           </ul>
         </nav>
 
@@ -57,7 +55,6 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/map" element={<Map />} />
           <Route path="/myInfo/:id" element={<MyInfo />} />   {/* 동적 경로 */}
-          <Route path="*" element={<NotFound />} />   {/* 404 처리 */}
         </Routes>
       </div>
     </Router>
