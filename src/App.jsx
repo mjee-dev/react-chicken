@@ -8,7 +8,7 @@ import Login from "./component/Login";
 import Map from "./component/Map";
 import MyInfo from "./component/MyInfo";
 import NotFound from "./component/NotFound";
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 // 메인 컴포넌트
 
@@ -32,30 +32,9 @@ function App() {
         </Route>
       </Routes>
 
-      <div className="text-3xl font-bold underline">
-        Hello, Tailwind!
-      </div>
-
-      <div>
-        {/* 네비게이션 링크 */}
-        <nav>
-          <ul>
-            <li><Link to="/">홈</Link></li>   {/* a 링크 대신 link 로 브라우저의 페이지 리로드 없이 라우팅 처리 */}
-            <li><Link to="/join">회원가입</Link></li>
-            <li><Link to="/login">로그인</Link></li>
-            <li><Link to="/map">지도</Link></li>
-            <li><Link to="">내 정보</Link></li>
-          </ul>
-        </nav>
-
-        {/* 라우터 설정 */}
-        <Routes>
-          <Route path="/" element={<Home />} />    {/* URL 경로와 해당 경로에서 렌더링할 컴포넌트를 설정, JSX형태로 */}
-          <Route path="/join" element={<Join />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/map" element={<Map />} />
-          <Route path="/myInfo/:id" element={<MyInfo />} />   {/* 동적 경로 */}
-        </Routes>
+      
+      <div className="wrapper">
+        <Home />
       </div>
     </Router>
   );

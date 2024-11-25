@@ -1,6 +1,7 @@
 import React from "react";
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { Link } from 'react-router-dom';
 
 const user = {
     name: 'Tom Cook',
@@ -10,11 +11,11 @@ const user = {
 };
 
 const navigation = [
-    { name: 'Home', href: '#', current: true },
-    { name: 'Dashboard', href: '#', current: false },
-    { name: 'Map', href: '#', current: false },
-    { name: 'Calendar', href: '#', current: false },
-    { name: 'Join', href: '#', current: false },
+    { name: '홈', link: '/', current: true },
+    { name: '로그인', link: '/login', current: false },
+    { name: '지도', link: '/map', current: false },
+    { name: '내 정보', link: '/myInfo/:userId', current: false },
+    { name: '회원가입', link: '/join', current: false },
 ];
 
 const userNavigation = [
@@ -25,153 +26,199 @@ const userNavigation = [
 
 function classNames(...classes: any) {
     return classes.filter(Boolean).join(' ')
-  }
+}
 
 
 function Header () {
     return (
-        <div className="min-h-full">
-            <Disclosure as="nav" className="bg-gray-800">
-                <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                    <div className="flex h-16 items-center justify-between">
-                        <div className="flex items-center">
-                            <div className="shrink-0">
-                                <img
-                                    alt="Your Company"
-                                    src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=500"
-                                    className="size-8"
-                                />
-                            </div>
-                            <div className="hidden md:block">
-                                <div className="ml-10 flex items-baseline space-x-4">
-                                    {navigation.map((item) => (
-                                        <a 
-                                            key={item.name}
-                                            href={item.href}
-                                            aira-current={item.current ? 'page' : undefined}
-                                            className={classNames(
-                                                item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                                                'rounded-md px-3 py-2 text-sm font-medium',
-                                            )}
-                                        >
-                                            {item.name}
-                                        </a>   
-                                    ))}
+            <div className="min-h-full">
+                <Disclosure as="nav" className="bg-gray-800">
+                    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                        <div className="flex h-16 items-center justify-between">
+                            <div className="flex items-center">
+                                <div className="shrink-0">
+                                    <img
+                                        alt="Your Company"
+                                        src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=500"
+                                        className="size-8"
+                                    />
+                                </div>
+                                <div className="hidden md:block">
+                                    <div className="ml-10 flex items-baseline space-x-4">
+                                        <ul>
+                                            {navigation.map((item) => (
+                                                <Link 
+                                                    key={item.name}
+                                                    to={item.link}
+                                                    aira-current={item.current ? 'page' : undefined}
+                                                    className={classNames(
+                                                        item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                                                        'rounded-md px-3 py-2 text-sm font-medium',
+                                                    )}
+                                                >
+                                                    {item.name}
+                                                </Link>   
+                                            ))}
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="hidden md:block">
-                            <div className="ml-4 flex items-center md:ml-6">
-                                <button
-                                    type="button"
-                                    className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                                >
-                                    <span className="absolute -inset-1.5"></span>
-                                    <span className="sr-only">View notification</span>
-                                    <BellIcon aria-hidden="true" className="size-6"></BellIcon>
-                                </button>
+                            <div className="hidden md:block">
+                                <div className="ml-6 flex items-center md:ml-6">
+                                    
 
-                                {/* 프로필 dropdown */}
-                                <Menu as="div" className="relative ml-3">
-                                    <div>
-                                        <MenuButton className="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                                            <span className="absolute -inset-1.5"></span>
-                                            <span className="sr-only">Open user menu</span>
-                                            <img alt="" src={user.imageUrl} className="size-8 rounded-full" />
-                                        </MenuButton>
-                                    </div>
-                                    <MenuItems
-                                        transition
-                                        className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 transition focus:outline-none 
-                                        data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
+                                    {/* <button data-tooltip-target="default-sidebar-example-toggle-dark-mode-tooltip" type="button" data-toggle-dark="dark" className="flex items-center w-9 h-9 justify-center text-xs font-medium text-gray-700 bg-white border border-gray-200 rounded-lg toggle-dark-state-example hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-gray-300 dark:focus:ring-gray-500 dark:bg-gray-800 focus:outline-none dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                                        <span className="absolute -inset-1.5"></span>
+                                        <svg data-toggle-icon="moon" className="w-3.5 h-3.5 hidden" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                                            <path d="M17.8 13.75a1 1 0 0 0-.859-.5A7.488 7.488 0 0 1 10.52 2a1 1 0 0 0 0-.969A1.035 1.035 0 0 0 9.687.5h-.113a9.5 9.5 0 1 0 8.222 14.247 1 1 0 0 0 .004-.997Z"></path>
+                                        </svg>
+                                        <svg data-toggle-icon="sun" className="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                            <path d="M10 15a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm0-11a1 1 0 0 0 1-1V1a1 1 0 0 0-2 0v2a1 1 0 0 0 1 1Zm0 12a1 1 0 0 0-1 1v2a1 1 0 1 0 2 0v-2a1 1 0 0 0-1-1ZM4.343 5.757a1 1 0 0 0 1.414-1.414L4.343 2.929a1 1 0 0 0-1.414 1.414l1.414 1.414Zm11.314 8.486a1 1 0 0 0-1.414 1.414l1.414 1.414a1 1 0 0 0 1.414-1.414l-1.414-1.414ZM4 10a1 1 0 0 0-1-1H1a1 1 0 0 0 0 2h2a1 1 0 0 0 1-1Zm15-1h-2a1 1 0 1 0 0 2h2a1 1 0 0 0 0-2ZM4.343 14.243l-1.414 1.414a1 1 0 1 0 1.414 1.414l1.414-1.414a1 1 0 0 0-1.414-1.414ZM14.95 6.05a1 1 0 0 0 .707-.293l1.414-1.414a1 1 0 1 0-1.414-1.414l-1.414 1.414a1 1 0 0 0 .707 1.707Z"></path>
+                                        </svg>
+                                        <span className="sr-only">Toggle dark/light mode</span>
+                                    </button> */}
+
+                                    {/* 테마 아이콘 */}
+                                    <label className="flex cursor-pointer gap-2 px-4">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="20"
+                                            height="20"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            strokeWidth="2"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round">
+                                            <circle cx="12" cy="12" r="5" />
+                                            <path
+                                            d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4" />
+                                        </svg>
+                                        <input type="checkbox" value="synthwave" className="toggle theme-controller" />
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="20"
+                                            height="20"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            strokeWidth="2"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round">
+                                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                                        </svg>
+                                    </label>
+
+                                    {/* 알림 아이콘 */}
+                                    <button
+                                        type="button"
+                                        className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                                     >
-                                        {userNavigation.map((item) => (
-                                            <MenuItem key={item.name}>
-                                                <a 
-                                                    href={item.href}
-                                                    className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:outline-none">
-                                                    {item.name}
-                                                </a>
-                                            </MenuItem>
-                                        ))}
-                                    </MenuItems>
+                                        <span className="absolute -inset-1.5"></span>
+                                        <span className="sr-only">View notification</span>
+                                        <BellIcon aria-hidden="true" className="size-6"></BellIcon>
+                                    </button>
 
-                                </Menu>
+                                    {/* 프로필 dropdown */}
+                                    <Menu as="div" className="relative ml-3">
+                                        <div>
+                                            <MenuButton className="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                                                <span className="absolute -inset-1.5"></span>
+                                                <span className="sr-only">Open user menu</span>
+                                                <img alt="" src={user.imageUrl} className="size-8 rounded-full" />
+                                            </MenuButton>
+                                        </div>
+                                        <MenuItems
+                                            transition
+                                            className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 transition focus:outline-none 
+                                            data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
+                                        >
+                                            {userNavigation.map((item) => (
+                                                <MenuItem key={item.name}>
+                                                    <a 
+                                                        href={item.href}
+                                                        className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:outline-none">
+                                                        {item.name}
+                                                    </a>
+                                                </MenuItem>
+                                            ))}
+                                        </MenuItems>
+                                    </Menu>
+                                </div>
+                            </div>
+                            <div className="-mr-2 flex md:hidden">
+                                {/* 모바일 menu button */}
+                                <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white 
+                                focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                                    <span className="absolute -inset-0.5"></span>
+                                    <span className="sr-only">Open main menu</span>
+                                    <Bars3Icon aria-hidden="true" className="block size-6 group-data-[open]:hidden"></Bars3Icon>
+                                    <XMarkIcon aria-hidden="true" className="hidden size-6 group-data-[open]:block"></XMarkIcon>
+                                </DisclosureButton>
                             </div>
                         </div>
-                        <div className="-mr-2 flex md:hidden">
-                            {/* 모바일 menu button */}
-                            <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white 
+                    </div>
+
+                    <DisclosurePanel className="md:hidden">
+                        <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
+                            {navigation.map((item) => (
+                                <DisclosureButton
+                                    key={item.name}
+                                    as="a"
+                                    href="item.href"
+                                    aria-current={item.current ? 'page' : undefined}
+                                    className={classNames(
+                                        item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                                        'block rounded-md px-3 py-2 text-base font-medium',
+                                    )}
+                                >
+                                    {item.name}
+                                </DisclosureButton>
+                            ))}
+                        </div>
+                        <div className="border-t border-gray-700 pb-3 pt-4">
+                        <div className="flex items-center px-5">
+                            <div className="shrink-0">
+                                <img alt="" src={user.imageUrl} className="size-10 rounded-full"></img>
+                            </div>
+                            <div className="ml-3">
+                                <div className="text-base/5 font-medium text-white">{user.name}</div>
+                                <div className="text-sm font-medium text-gray-400">{user.email}</div>
+                            </div>
+                            <button type="button" className="relative ml-auto shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white
                             focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                                <span className="absolute -inset-0.5"></span>
-                                <span className="sr-only">Open main menu</span>
-                                <Bars3Icon aria-hidden="true" className="block size-6 group-data-[open]:hidden"></Bars3Icon>
-                                <XMarkIcon aria-hidden="true" className="hidden size-6 group-data-[open]:block"></XMarkIcon>
-                            </DisclosureButton>
+                                <span className="absolute -inset-1.5" />
+                                <span className="sr-only">View notifications</span>
+                                <BellIcon aria-hidden="true" className="size-6" />
+                            </button>
                         </div>
                     </div>
-                </div>
-
-                <DisclosurePanel className="md:hidden">
-                    <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
-                        {navigation.map((item) => (
+                    <div className="mt-3 space-y-1 px-2">
+                        {userNavigation.map((item) => (
                             <DisclosureButton
-                                key={item.name}
-                                as="a"
-                                href="item.href"
-                                aria-current={item.current ? 'page' : undefined}
-                                className={classNames(
-                                    item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                                    'block rounded-md px-3 py-2 text-base font-medium',
-                                )}
+                            key={item.name}
+                            as="a"
+                            href={item.href}
+                            className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
                             >
                                 {item.name}
                             </DisclosureButton>
                         ))}
                     </div>
-                    <div className="border-t border-gray-700 pb-3 pt-4">
-                    <div className="flex items-center px-5">
-                        <div className="shrink-0">
-                            <img alt="" src={user.imageUrl} className="size-10 rounded-full"></img>
-                        </div>
-                        <div className="ml-3">
-                            <div className="text-base/5 font-medium text-white">{user.name}</div>
-                            <div className="text-sm font-medium text-gray-400">{user.email}</div>
-                        </div>
-                        <button type="button" className="relative ml-auto shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white
-                        focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                            <span className="absolute -inset-1.5" />
-                            <span className="sr-only">View notifications</span>
-                            <BellIcon aria-hidden="true" className="size-6" />
-                        </button>
-                    </div>
-                </div>
-                <div className="mt-3 space-y-1 px-2">
-                    {userNavigation.map((item) => (
-                        <DisclosureButton
-                           key={item.name}
-                           as="a"
-                           href={item.href}
-                           className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
-                        >
-                            {item.name}
-                        </DisclosureButton>
-                    ))}
-                </div>
-                </DisclosurePanel>
-            </Disclosure>
+                    </DisclosurePanel>
+                </Disclosure>
 
-            <header className="bg-white shadow">
-                <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-                    <h1 className="text-3xl font-bold tracking-tight text-gray-900">Home</h1>
-                </div>
-            </header>
-            <main>
-                <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-                    {/* 내용 */}
-                </div>
-            </main>
-        </div>
+                <header className="bg-white shadow">
+                    <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+                        <h1 className="text-3xl font-bold tracking-tight text-gray-900">Home</h1>
+                    </div>
+                </header>
+                <main>
+                    <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+                        {/* 내용 */}
+                    </div>
+                </main>
+            </div>
     );
 }
 

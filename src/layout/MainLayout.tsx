@@ -1,16 +1,14 @@
 import React from 'react';
 import Header from "./Header";
-import Sidebar from "./Sidebar";
 import Footer from "./Footer";
 import { Outlet } from 'react-router-dom';
 
-// MainLayout : Header, Sidebar, main, Footer
+// MainLayout : Header, main, Footer
 function MainLayout() {
     return (
-        <div className='contain-layout'>
+        <div>
             <Header />
-            <div>
-                <Sidebar />
+            <div className='flex w-full flex-col border-opacity-50'>
                 <main className='main'>
                     [main-Outlet]<Outlet />  {/* 이 자리에 다른 페이지들이 표시 됨 */}
                 </main>

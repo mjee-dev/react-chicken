@@ -1,3 +1,9 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
 .App {
   text-align: center;
 }
@@ -26,6 +32,27 @@
 
 .App-link {
   color: #61dafb;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Viewport height */
+}
+
+main {
+  flex: 1; /* Main content takes up remaining space */
+  padding: 1rem;
+}
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #333;
+  color: white;
+  padding: 1rem;
+  text-align: center;
 }
 
 @keyframes App-logo-spin {
