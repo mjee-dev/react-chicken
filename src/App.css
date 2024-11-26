@@ -40,9 +40,19 @@ body, html {
   min-height: 100vh; /* Viewport height */
 }
 
+header {  
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 205px;
+  z-index: 1000;
+}
 main {
   flex: 1; /* Main content takes up remaining space */
   padding: 1rem;
+  margin-top: calc(205px); 
+  overflow-y: auto;
+  align-items: center;  /* 가운데 정렬 */
 }
 footer {
   position: fixed;
@@ -53,6 +63,11 @@ footer {
   color: white;
   padding: 1rem;
   text-align: center;
+}
+
+.ylw {
+  --tw-bg-opacity: 1 !important;
+  background-color: oklch(84.71% 0.199 83.87 / 1) !important;
 }
 
 @keyframes App-logo-spin {

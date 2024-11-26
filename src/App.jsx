@@ -19,7 +19,7 @@ function App() {
       <Routes>
         {/* MainLayout */}
         <Route path="/" element={<MainLayout />}>
-          <Route path="/home" element={<Home />}></Route>
+          <Route path="/" element={<Home />}></Route>
           <Route path="/map" element={<Map />}></Route>
           <Route path="/myInfo/:userId" element={<MyInfo />}></Route>
           <Route path="*" element={<NotFound />} />   {/* 404 처리 */}
@@ -33,9 +33,9 @@ function App() {
       </Routes>
 
       
-      <div className="wrapper">
+      {/* <div className="wrapper mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
         <Home />
-      </div>
+      </div> */}
     </Router>
   );
 }
