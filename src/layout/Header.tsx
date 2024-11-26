@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
@@ -30,10 +30,22 @@ function classNames(...classes: any) {
 
 
 function Header () {
+    // 다크 테마
+    const [theme, setTheme] = useState('light');
+    
+    useEffect(() => {
+        document.documentElement.setAttribute('data-theme', theme);
+    }, [theme]);
+
+    const toggleTheme = () => {
+        setTheme(theme === 'light' ? 'dark' : 'light');
+    };
+
+
     return (
             /* 헤더 메뉴 */
             <header className="shadow">
-                <Disclosure as="nav" className="bg-white">
+                <Disclosure as="nav" className="backg-white">
                     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                         <div className="flex h-16 items-center justify-between">
                             <div className="flex items-center">
@@ -56,8 +68,7 @@ function Header () {
                                                         item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                                                         'rounded-md px-3 py-2 text-sm font-medium',
                                                     )}
-                                                >
-                                                    {item.name}
+                                                >{item.name}
                                                 </Link>   
                                             ))}
                                         </ul>
@@ -93,7 +104,7 @@ function Header () {
                                             <path
                                             d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4" />
                                         </svg>
-                                        <input type="checkbox" value="synthwave" className="toggle theme-controller" />
+                                        <input type="checkbox" value="synthwave" onClick={toggleTheme} className="toggle theme-controller ylw" />
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             width="20"
@@ -162,16 +173,19 @@ function Header () {
                         {/* 모바일 메뉴 영역 */}
                         <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
                             {navigation.map((item) => (
-                            <DisclosureButton
-                                key={item.name}
-                                as="a"
-                                href="item.href"
-                                aria-current={item.current ? 'page' : undefined}
-                                className={classNames(
-                                    item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                                    'block rounded-md px-3 py-2 text-base font-medium',
-                                )}
-                            >{item.name}
+                            <DisclosureButton>
+                                <ul>
+                                    <Link
+                                        key={item.name}
+                                        to={item.link}
+                                        aria-current={item.current ? 'page' : undefined}
+                                        className={classNames(
+                                            item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                                            'block rounded-md px-3 py-2 text-base font-medium',
+                                        )}
+                                    >{item.name}
+                                    </Link>
+                                </ul>
                             </DisclosureButton>
                             ))}
                         </div>
