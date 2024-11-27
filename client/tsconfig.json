@@ -107,6 +107,6 @@
     // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
     "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
   },
-  "include": ["src/**/*", "**/*.js", "tailwind.config.ts", "tailwind.config.ts"],    // TypeScript가 컴파일할 파일 경로
-  "exclude": ["node_modules"]   // 제외할 경로를 지정. 기본적으로 node_modules는 제외
+  "include": ["client/src/**/*", "client/**/*.js", "client/tailwind.config.ts", "client/tailwind.config.ts"],    // TypeScript가 컴파일할 파일 경로
+  "exclude": ["client/node_modules"]   // 제외할 경로를 지정. 기본적으로 node_modules는 제외
 }
