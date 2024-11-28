@@ -1,7 +1,9 @@
-import type { Mongoose } from 'mongoose';
+// global.d.ts
+import mongoose from 'mongoose';
 
 declare global {
-  namespace globalThis {
-    var _mongo: Promise<Mongoose>
-  }
+  var _mongoose: {
+    conn: mongoose.Connection | null;
+    promise: Promise<mongoose.Connection> | null;
+  };
 }

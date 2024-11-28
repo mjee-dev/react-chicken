@@ -1,14 +1,17 @@
 {
     "compilerOptions": {
-      "target": "ES6",
-      "module": "commonjs",
-      "outDir": "./dist",
-      "rootDir": "./src",
+      "target": "ESNext",
+      "module": "CommonJS", // Node.js 환경에 적합
+      "moduleResolution": "Node",
+      "outDir": "dist",
+      // "rootDir": "./src",
       "esModuleInterop": true,
       "strict": true,
-      "types": ["node"]
+      "types": ["node"],
+      "baseUrl": "./",
+      "skipLibCheck": true
     },
-    "include": ["server/**/*"],
-    "exclude": ["node_modules"]
+    "include": ["**/*", "*.ts"],
+    "exclude": ["node_modules", "dist"] //dist: 빌드 출력 폴더
   }
   
